@@ -17,7 +17,7 @@ for line in f:
             row = line.split()
             if count <= 100:
                 count = count + 1
-                print row[-2], row[-1]
+                print row[-1], "\t", row[-2]
         
             
         
