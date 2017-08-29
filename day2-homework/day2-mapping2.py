@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import sys
-
+argu = sys.argv[2]
 # opens mapping file made
 f = open( sys.argv[1])
 
@@ -12,7 +12,8 @@ fly_dict = {}
 for line in f:
     #stripped; assigned the two columns of data to variable names
     col = line.rstrip("\r\n").split("\t")
-    flybase = col[0]
+    # remove space 
+    flybase = col[0][:-1]
     ac = col[1]
     # add ID's to the dictionary
     if flybase not in fly_dict:
@@ -32,12 +33,27 @@ for line in s:
     if fields[8] == "gene_id":
         continue
     # looking at the gene_ids in fly_dict and comparing those to the gene_ids in field 8 of the ctab file
-    for fields[8] in fly_dict:
+    if argu == "skip":
+        if fields[8] in fly_dict:
         # allowed of only the first 100 
-        if count <= 100:
+            if count <= 100:
             # printed the line in a nice way
-            print line.strip("\r\n"), "\t", fly_dict[fields[8]][0]
+                fields[8] = fly_dict[fields[8]][0]
+                print "\t".join(fields)
+                count = count + 1
+                
+    if argu == "defv":
+        if count <= 100:
+            if fields[8] in fly_dict:
+                fields[8] = fly_dict[fields[8]][0]
+                print "\t".join(fields)
+                count = count + 1
+        else:
+            fields[8] = "N/A"
+            print "\t".join(fields)
             count = count + 1
+            
+            
             
             
 
