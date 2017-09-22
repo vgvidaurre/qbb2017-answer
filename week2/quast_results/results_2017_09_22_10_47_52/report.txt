@@ -1,0 +1,24 @@
+All statistics are based on contigs of size >= 500 bp, unless otherwise noted (e.g., "# contigs (>= 0 bp)" and "Total length (>= 0 bp)" include all contigs).
+
+Assembly                    velvet_contigs  spades-output_contigs  spades-output2_contigs  week2_velvet_2_contigs  spades_nano-output_contigs
+# contigs (>= 0 bp)         305             128                    1                       11                      64                        
+# contigs (>= 1000 bp)      0               4                      1                       7                       18                        
+# contigs (>= 5000 bp)      0               0                      1                       7                       3                         
+# contigs (>= 10000 bp)     0               0                      1                       4                       0                         
+# contigs (>= 25000 bp)     0               0                      1                       1                       0                         
+# contigs (>= 50000 bp)     0               0                      1                       0                       0                         
+Total length (>= 0 bp)      56973           49818                  100000                  100061                  70165                     
+Total length (>= 1000 bp)   0               5313                   100000                  99562                   54576                     
+Total length (>= 5000 bp)   0               0                      100000                  99562                   17908                     
+Total length (>= 10000 bp)  0               0                      100000                  81134                   0                         
+Total length (>= 25000 bp)  0               0                      100000                  33235                   0                         
+Total length (>= 50000 bp)  0               0                      100000                  0                       0                         
+# contigs                   11              20                     1                       7                       23                        
+Largest contig              998             1737                   100000                  33235                   6731                      
+Total length                7243            15922                  100000                  99562                   58343                     
+GC (%)                      50.71           51.21                  52.59                   52.58                   52.38                     
+N50                         632             718                    100000                  19911                   4036                      
+N75                         542             635                    100000                  13440                   1961                      
+L50                         5               8                      1                       2                       6                         
+L75                         8               13                     1                       4                       11                        
+# N's per 100 kbp           0.00            0.00                   0.00                    0.00                    0.00                      
