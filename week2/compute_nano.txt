@@ -1,0 +1,5 @@
+Number of contigs = 64
+Max = 6731
+Min = 207
+N50 = 2673
+Mean = 1096.328125
