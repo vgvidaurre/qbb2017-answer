@@ -1,0 +1,23 @@
+tar -xzf g1e.tar.xz
+gunzip chr19.fa.gz 
+bowtie2-build -f chr19.fa bowtie_chr19
+bowtie2 -x bowtie_chr19 -U input_ER4.fastq -S input_ER4.sam 
+bowtie2 -x bowtie_chr19 -U CTCF_ER4.fastq -S CTCF_ER4.sam 
+bowtie2 -x bowtie_chr19 -U CTCF_G1E.fastq -S CTCF_G1E.sam
+bowtie2 -x bowtie_chr19 -U input_G1E.fastq -Sinput_G1E.sam 
+
+macs2 callpeak -g 61431566 -t CTCF_G1E.sam --outdir G1E_woC 
+macs2 callpeak -g 61431566 -t CTCF_ER4.sam -c input_ER4.sam -- outdir ER4_wC 
+macs2 callpeak -g 61431566 -t CTCF_G1E.sam -c input_G1E.sam --outdir G1E_wC 
+macs2 callpeak -g 61431566 -t CTCF_ER4.sam --outdir ER4_woC 
+
+bedtools intersect -a ~/qbb2017-answer/week6/G1E_wC/NA_peaks.narrowPeak -b ~/qbb2017-answer/week6/ER4_wC/NA_peaks.narrowPeak -v > G1E_a_diff.bed 
+bedtools intersect -a ~/qbb2017-answer/week6/ER4_wC/NA_peaks.narrowPeak -b ~/qbb2017-answer/week6/G1E_wC/NA_peaks.narrowPeak -v > ER4_a_diff.bed
+
+cat G1E_a_diff.bed | head -n 100 > G1E_a_diff_100.bed
+cat ER4_a_diff.bed | head -n 100 > ER4_a_diff_100.bed
+
+bedtools getfasta -fi chr19.fa -bed ~/qbb2017-answer/week6/G1E_wC/NA_peaks.narrowPeak > G1E.fa
+ bedtools getfasta -fi chr19.fa -bed ~/qbb2017-answer/week6/ER4_wC/NA_peaks.narrowPeak > ER4.fa
+ 
+/usr/local/opt/meme/bin/meme-chip -meme-maxw 20 -db motif_databases/JASPAR/JASPAR_CORE_2016_vertebrates.meme ER4.fa
